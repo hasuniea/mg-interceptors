@@ -3,7 +3,9 @@
 ## WSO2 API Mirogateway 3 - On the fly message transformation through Interceptos
 
 #### Description
-Interceptors can be used to do request and response transformations and mediation. Request interceptors are engaged before sending the request to the back end and response interceptors are engaged before responding to the client. API developer can write his own request and response interceptors using ballerina and add it to the project and define them in the open API definition using extensions
+Interceptors can be used to do request and response transformations and mediation. Request interceptors are engaged before sending the request to the back end and response interceptors are engaged before responding to the client. API developer can write his own request and response interceptors using ballerina and add it to the project and define them in the open API definition using extensions.
+
+![Alt text](architecture-new.png?raw=true "Title")
 
 In this screencast, We describe following scenarioes
 
