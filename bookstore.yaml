@@ -1,0 +1,164 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: BookStore
+  license:
+    name: MIT
+servers:
+  - url: http://bookstore.io/v1
+x-wso2-basePath: /bookstore/v1
+x-wso2-production-endpoints:
+  urls:
+  - https://192.168.8.100:8000
+paths:
+  /book:
+    get:
+      summary: List all books
+      operationId: listBooks
+      responses:
+        '200':
+          description: A paged array of books
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Book"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: "Add a new book to the store"
+      description: ""
+      operationId: "addBook"
+      x-wso2-request-interceptor: validateRequest
+      x-wso2-request-interceptor: sqlInjectionIntercept
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Book object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        405:
+          description: "Invalid input"            
+  /book/{bookId}:
+    get:
+      summary: Info for a specific book from bookId
+      operationId: showBookById
+      tags:
+        - books
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          description: The id of the books to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /book/title/{title}:
+    get:
+      summary: Info for a specific book from title
+      operationId: showBookById
+      x-wso2-response-interceptor: validateResponse
+      tags:
+        - books
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          description: The id of the books to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /book/ebooks/{title}:
+    get:
+      summary: Info for ebooks in the store
+      operationId: showBookById
+      x-wso2-request-interceptor: extractRequest
+      x-wso2-response-interceptor: transformResponse
+      tags:
+        - books
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          description: The id of the books to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"              
+components:
+  schemas:
+    Book:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        tag:
+          type: string
+    Books:
+      type: array
+      items:
+        $ref: "#/components/schemas/Books"
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

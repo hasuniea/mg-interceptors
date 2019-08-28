@@ -1,0 +1,21 @@
+[docker]
+  [docker.dockerConfig]
+    enable = true
+    name = "bookstore"
+    registry = 'hasuniea'
+    tag = 'v1'
+    #buildImage = ''
+    #dockerHost = ''
+    #dockerCertPath = ''
+    #baseImage = ''
+    #enableDebug = ''
+    #debugPort = ''
+    #push = ''
+    username = ''
+    password = ''
+  [docker.dockerCopyFiles]
+    enable = true
+    [[docker.dockerCopyFiles.files]]
+        source = '/Users/hasunie/RD/ScreenCast/wso2am-micro-gw-toolkit-3.0.2-SNAPSHOT/resources/conf/micro-gw.conf'
+        target = '/home/ballerina/conf/micro-gw.conf'
+        isBallerinaConf = true
