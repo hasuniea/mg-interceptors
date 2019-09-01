@@ -15,9 +15,9 @@ Furthermore,to ellaborate the scenario, We deploy two different micro gateway se
 
 | nonInter  | bookstore |
 | ------------- | ------------- |
-| Pieo API definition without interceptors  | with interceptors  |
-|  HTTP 9020     HTTPS 9070  | HTTP 9090     HTTPS 9095
-  |
+| Pio API definition without interceptors  | with interceptors  |
+|  HTTP 9020      | HTTP 9090     
+  |  HTTPS 9070   | HTTPS 9095
 
 nonInter - Pieo API definition without interceptors.  HTTP 9020     HTTPS 9070
 bookstore - with interceptors HTTP 9090     HTTPS 9095
