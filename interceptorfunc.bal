@@ -68,7 +68,6 @@ public function transformResponse(http:Caller caller, http:Response res) {
           body = res.getJsonPayload();
            if (body is json) {
                 body.remove("MobileURL");
-                body.remove("MobileCode");
                 res.setPayload(untaint body);
            }
         } 
