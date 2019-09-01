@@ -1,6 +1,6 @@
 
 
-## WSO2 API Mirogateway 3 - On the fly message transformation through Interceptos
+## WSO2 API Mirogateway 3 - On the fly message transformation through Interceptors
 
 #### Description
 
@@ -19,8 +19,6 @@ Furthermore,to ellaborate the scenario, We deploy two different micro gateway se
 |  HTTP 9020      | HTTP 9090     
   |  HTTPS 9070   | HTTPS 9095
 
-nonInter - Pieo API definition without interceptors.  HTTP 9020     HTTPS 9070
-bookstore - with interceptors HTTP 9090     HTTPS 9095
 
 1.) The backend expects the request payload to be in JSON content type. But your client application can only send messages in XML format. The backend may rejects the request and send an error response as it doesn’t support XML content type.
 In such scenarioes, WSO2 micro-gateway supports request interceptor to transform the payload to JSON and pass it to the backend.
