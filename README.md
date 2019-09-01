@@ -66,11 +66,16 @@ curl -k -X POST "https://localhost:9095/bookstore/v1/book" -H "accept: applicati
 
 Result : {"fault":{"code":"Error", "message":"SQL Injection", "description":"Threat detected in payload"}}
 
-3.) If there are multiple types of clients access the API deployed in the micro gateway. Each client use different type of message formats hence microgateway should change the response message formats accordingly. In such a scenarieos, We can use Response interceptors to transform messages by verifying the user-agent
+### Scenario 3:
+Multiple types of clients access the API deployed in the micro gateway. Each client use different type of message formats hence microgateway should change the response message formats accordingly. In such a scenarie, we can use Response interceptors to transform messages by verifying the user-agent.
 
-invoke through noninter
+#### Invoke through noninter
+
+#### REQUEST message
+
 curl -X GET "https://localhost:9070/bookstore/v1/book/ebooks/Dragon" -H "User-Agent: iPhone" -H "Authorization:Bearer $TOKEN" -k
 
+#### RESPONSE message
 Resule : {
          "isbn": "9780670921621",
          "title": "The Lean Startup",
@@ -84,9 +89,11 @@ Resule : {
          "MobileCode": "PENGUIN"
     };
 
-
+#### REQUEST message
 
 curl -X GET "https://localhost:9095/bookstore/v1/book/ebooks/Dragon" -H "User-Agent: iPhone" -H "Authorization:Bearer $TOKEN" -k
+
+#### RESPONSE message
 
 Result :
 
